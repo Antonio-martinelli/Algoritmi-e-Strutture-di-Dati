@@ -32,4 +32,8 @@
 *.hex
 
 # Debug files
+<<<<<<< HEAD
 *.dSYM/
+=======
+*.dSYM/
+>>>>>>> 57b9d79113a5143c0da8d17a321fba14afdb02b3
