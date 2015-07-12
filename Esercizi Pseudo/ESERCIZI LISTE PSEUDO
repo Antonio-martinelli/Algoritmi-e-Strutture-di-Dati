@@ -1,0 +1,178 @@
+ESERCIZI LISTE PSEUDO
+
+MASSIMO(l)
+max = l.head
+x = max.next
+while (x != NULL)
+	if (max.info < x.info)
+		max = x
+	x = x.next
+return max.info
+
+SOMMA(l)
+somma = 0
+x = l.head
+while (x != NULL)
+	somma += x.info
+	x = x.next
+return somma
+
+SEARCH(l,u)
+i = l.head
+while i != NULL
+	if i.info == u
+		return i
+	i = i.next
+return NULL
+
+PREV(l,i)
+prev = l.head
+if (prev.info == i.info)
+	return NULL
+while prev.next != NULL
+	if (prev.next == i)
+		return prev
+	prev = prev.next
+return NULL
+
+DELETE(l,i)
+if (l.head == i)
+	l.head = l.head.next
+	return
+prev = l.head
+while prev.next != NULL
+	if (prev.next == i)
+		prev.next = prev.next.next
+	prev = prev.next
+
+DELETE(l,u)	
+prev = l.head
+curr = prev.next
+if (prev.info == u)
+	l.head = curr
+	return
+while curr != NULL
+	if (curr.info == u)
+		prev.next = curr.next
+	prev.next = curr
+	curr = curr.next
+
+COMUNI(l1,l2)	
+x = l1.head
+y = l2.head
+cont = 0
+while x != NULL
+	while y != NULL
+		if (x.info == y.info)
+			cont ++
+		y = y.next
+	x = x.next
+	y = l2.head
+return cont
+
+INVERSA(l)
+x = l.head
+//lout e' una nuova lista vuota
+while x != NULL
+	AGGIUNGI_IN_TESTA(lout, x)
+	x =x.next
+return lout
+
+AGGIUNGI_IN_TESTA(l, n)	
+temp = l.head
+n.next = temp
+l.head = n
+
+ACCODA(l1,l2)	
+x = l1.head
+while x.next != NULL
+	x = x.next
+y = l2.head
+while y != NULL
+	x.next = y
+	x = x.next
+	y = y.next
+return l1
+
+<<-----------------------------------------------LISTE DOPPIAMENTE CONCATENATE------------------------------------>>
+
+INSERT-BEFORE(l,x,y)
+curr = l.head
+if (curr.info == y.info)
+	INSERT(l,x.info)
+curr = curr.next
+prev = curr.prev
+while curr != NULL
+	if (curr.info == y.info)
+		prev.next = x
+		x.prev = prev
+		x.next = curr
+		curr.prev = x
+	prev = curr
+	curr = curr.next
+
+DELETE(l,u)
+x = l.head
+while x != NULL
+	if x.info == u
+		if x.prev == NULL
+			l.head = x.next
+		else
+			x.prev.next = x.next
+		if x.next != NULL
+			x.next.prev = x.prev
+		return
+	x = x.next
+
+INSERT_ORDERED(l,u)		
+// new nuovo nodo con info = u, prev e next = NULL
+x = l.head
+if x == NULL
+	l.head = new
+	return
+while x != NULL
+	if (x.info > u)
+		if (x.prev == NULL)
+			x.prev = new \\
+			l.head = new
+		else
+			x.prev.next = new
+			new.prev = x.prev
+			x.prev = new
+		new.next = x
+		return
+	x = x.next
+
+MERGE(l1,l2)
+//l3 nuova lista vuota
+x = l1.head
+y = l2.head
+z = l3.head
+while (x != NULL || y != NULL)
+	if (x != NULL)
+		INSERT_ORDERED(l3,x.info)
+		x = x.next
+	if (y != NULL)
+		INSERT_ORDERED(l3,y.info)
+		y = y.next
+return l3
+
+DOPPIONI(l)
+x = l.head
+y = x.next
+while (x.next != NULL)
+	while (y != NULL)
+		if (x.info == y.info)
+			return FALSE
+		y = y.next
+	x = x.next
+	y = x.next
+return TRUE
+
+DOPPIONI-SORTED(l)
+x = l.head
+while x != NULL
+	if (x.info == x.next.info)
+		return FALSE
+	x = x.next
+return TRUE

@@ -1,0 +1,14 @@
+CAMMINO_PIU_CORTO(t)
+if (t == NULL)
+	return 0
+else
+	if(t.parent != NULL)
+		return MIN(CAMMINO_PIU_CORTO(t.left), CAMMINO_PIU_CORTO(t.right)) + 1
+	else
+		return MIN(CAMMINO_PIU_CORTO(t.left), CAMMINO_PIU_CORTO(t.right))
+
+MIN(int a, int b)
+	if (a<b)
+		return a
+	else
+		return b

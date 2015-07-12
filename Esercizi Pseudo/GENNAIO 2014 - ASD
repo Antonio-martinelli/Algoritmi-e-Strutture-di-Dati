@@ -1,0 +1,37 @@
+GENNAIO 2014 - ASD
+
+Esercizio 2 (solo studenti D.M. 270/99, 6 CFU)
+Scrivi lo pseudocodice della procedura ORDINE‐BFS(A,u) che accetti in input un grafo non orientato A e l’indice di un nodo u e restituisca una lista L di interi in cui gli indici dei nodi compaiono nell’ordine con cui sono stati raggiunti nella visita in ampiezza di A a partire da u. Assumi che il grafo sia connesso. Scrivi anche la procedura che aggiunge un elemento alla lista.
+
+ORDINE-BFS(A, u)
+for i = 0 to A.length - 1
+	color[i] = 0
+//l nuova lista vuota
+EMPTY-QUEUE(q)
+color[u] = 1
+ENQUEUE(q, u)
+while !IS-EMPTY(q)
+	v = DEQUEUE(q)
+	x = A[v]
+	while x != NULL
+		k = x.key
+		if (color[k] == 0)
+		color[k] = 1
+		ADD-CODA(l,k)
+		ENQUEUE(q, k)
+		x = x.next
+	color[k] = 2
+return l
+
+ADD-CODA(l, k)
+x = l.head
+nodo.info = k
+nodo.next = NULL
+if x != NULL
+	while x.next != NULL
+		x = x.next
+	nodo.prev = x
+	x.next = nodo
+else
+	l.head = nodo
+	nodo.prev = NULL

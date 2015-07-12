@@ -1,0 +1,44 @@
+sesercizi sugli alberi binari
+9. scrivi lo pseudocodice della procedura
+CERCA(t,n) che ritorna TRUE se il valore n è
+presente nell’albero binario t
+– facendo uso di una visita in preordine
+– facendo uso di una visita in postordine
+– facendo uso di una visita simmetrica
+
+CERCA(t,v)  //preordine
+return CERCA-PREORDINE(t.root,v)
+
+CERCA-PREORDINE(n,v)
+if (n == NULL)
+	return FALSE
+if n.info == v
+	return TRUE
+l = CERCA-PREODINE(n.left, v)
+r = CERCA-PREORDINE(n.right, v)
+return l or r
+------------------------------------------------------
+CERCA(t,v) //postordine
+return CERCA-POSTORDINE(t.root,v)
+
+CERCA-POSTORDINE(n,v)
+if (n == NULL)
+	return FALSE
+if CERCA-POSTORDINE(n.left)
+	return TRUE
+if CERCA-POSTORDINE(n.right)
+	return TRUE
+return n.info == v
+-------------------------------------------------------
+
+CERCA(t,v) //simmetrica
+return CERCA-SIMMETRICA(t.root, v)
+
+CERCA-SIMMETRICA(n,v)
+if (n == NULL)
+	return FALSE
+if (CERCA-SIMMETRICA(n.left,v))
+	return TRUE
+if (n.info == v)
+	return TRUE
+return CERCA-SIMMETRICA(n.right,v)

@@ -1,0 +1,77 @@
+esercizi sullo scorrimento delle liste
+1. scrivi lo pseudocodice della procedura
+MASSIMO(l) che ritorna il valore del
+massimo elemento contenuto in una lista
+singolarmente concatenata di interi
+
+MASSIMO(l)
+i = l.head
+int max = i.info
+while (i.info != NULL)
+	if (max < i.info)
+		max = i.info
+	i = i.next
+return max
+
+2. scrivi lo pseudocodice della procedura
+SOMMA(l) che ritorna la somma degli
+elementi contenuti in una lista singolarmente
+concatenata di interi
+
+SOMMA(l)
+int somma = 0
+i = l.head
+while (i.info != NULL)
+	somma += i.info
+	i = i.next
+return somma
+
+3. scrivi lo pseudocodice della procedura SEARCH(l,u)
+che ritorna il riferimento all’elemento i che contiene
+il valore intero u in una lista singolarmente
+concatenata di interi (oppure NULL se u non è nella
+lista)
+– discuti la complessità dell’algoritmo in funzione del
+numero n degli elementi in lista
+
+SEARCH(l,u)
+i = l.head
+while (i.info!= NULL)
+	if (i.info == u)
+		return i
+	i = i.next
+return NULL
+
+4. scrivi lo pseudocodice della procedura PREV(l,i)
+che ritorna il riferimento all’elemento che precede
+l’elemento i in una lista singolarmente concatenata
+di interi (oppure NULL se i è il primo elemento della
+lista)
+
+PREV(l,i)
+j = l.head
+if (j.info == i)
+	return NULL
+while (j.next != NULL)
+	if (j.next.info == i)
+		return j
+	j = j.next
+return NULL
+
+5. scrivi lo pseudocodice dell’operazione
+DELETE(l,i) che cancella il nodo i di in una
+lista singolarmente concatenata
+– discuti della complessità dell’algoritmo
+
+
+
+6. scrivi lo pseudocodice dell’operazione
+DELETE(l,u) che cancella il nodo che
+contiene il valore intero u in una lista
+singolarmente concatenata di interi
+
+DELETe(l,u)
+j = l.head
+while (j.next != NULL)
+	if (j.next.info == u)
+		j.next = j.next.next

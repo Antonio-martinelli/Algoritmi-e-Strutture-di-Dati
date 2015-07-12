@@ -1,0 +1,46 @@
+Esercizi C - Alberi
+
+struct tree_node {
+	int dato;
+	struct tree_node *sx;
+	struct tree_node *dx;
+}
+typedef struct tree_node *Tree;
+
+
+Esercizio 1:
+scrivere la funzione ricerca che dato un albero binario t e un intero k,
+restituisca 1 se k è contenuto in almeno un nodo di t, 0 altrimenti.
+Se l’albero è vuoto restituire 0.
+
+int ricerca(Tree t, int k) {
+	
+	if (t == NULL) return 0;
+	return t->dato == k || 
+			ricerca(t->sx, k) || 
+			ricerca(t->dx, k);
+}
+
+Esercizio 2:
+scrivere la funzione get_max che dato un albero binario t restituisca
+il valore massimo tra i valori contenuti nei nodi di t, 0 altrimenti.
+Se l’albero è vuoto restituire -1.
+
+int get_max(t) {
+	int max_sx, max_dx;
+	if (t == NULL) return -1;
+
+	max_sx = get_max(t->sx);
+	max_dx = get_max(t->dx);
+
+	return max3(max_sx, max_dx, t->dato);
+}
+
+int max3(int a, int b, int c) {
+	if (a>b)
+		if (c>a) return c;
+		else return a;
+	else 
+		if (c>b) return c;
+		else return b;
+}

@@ -1,0 +1,130 @@
+Esercizi di ricapitolazione
+
+esercizi sulle liste (1)
+• scrivi lo pseudocodice della procedura
+TOGLI_MINORI(l, k) che elimina dalla lista di interi
+doppiamente concatenata l tutti gli elementi di valore
+minore di k, inserendoli in un’altra lista (in qualunque
+ordine) che viene restituita in output
+
+TOGLI_MINORI(l, k)
+/* lout è una nuova lista doppiamente concatenata di interi */
+lout.head = NULL
+x = l.head
+while (x != NULL)
+	temp = x.next
+	if (x.info < k)
+		AGGIUNGI(lout,x.info)
+		RIMUOVI(l,x)
+	x = temp
+return lout
+
+AGGIUNGI(l,k)
+x.info = k
+x.next = l.head
+x.prev = NULL
+if (l.head != NULL)
+	l.head.prev = x
+	l.head = x
+
+RIMUOVI(l,x)
+if (x.prev != NULL)
+	x.prev.next = x.next
+else
+	l.head = x.next
+	l.head.prev = NULL
+if (x.next != NULL)
+	x.next.prev = x.prev
+
+• scrivi lo pseudocodice della procedura
+MULTIINSIEME(l) che ritorna TRUE se una lista di
+interi doppiamente concatenata l rappresenta un
+multiinsieme (cioè un insieme con elementi ripetuti),
+altrimenti, se tutti gli elementi sono distinti, ritorna
+FALSE
+
+MULTIINSIEME(l)
+multi = true
+x = l.head
+while (x != NULL)
+	y = x.next
+	while (y != NULL)
+		if (x.info == y.info)
+			return TRUE
+		y = y.next
+	x = x.next
+return FALSE
+
+----------------------------------------------------------------------------------------------------------------
+
+esercizi sulle liste (2)
+• scrivi lo pseudocodice della procedura
+INTERSEZIONE(l1,12) che accetti come input due
+insiemi di interi, rappresentati tramite liste
+doppiamente concatenate, e restituisca in output una
+lista doppiamente concatenata che rappresenti
+l’intersezione dei due insiemi
+
+INTERSEZIONE(l1,l2)
+lout.head = NULL
+x = l1.head
+y = l2.head
+while (x != NULL)
+	while (y != NULL)
+		if (x.info == y.info)
+			AGGIUNGI(lout, x.info)
+		y = y.next
+	y = l2.head
+	x = x.next
+return lout
+
+• scrivi lo pseudocodice della procedura UNIONE(l1,12)
+che accetti come input due insiemi di interi,
+rappresentati tramite liste doppiamente concatenate, e
+restituisca in output una lista doppiamente concatenata
+che rappresenti l’unione dei due insiemi
+
+UNIONE(l1,l2)
+/* lout è una nuova lista doppiamente concatenata di interi */
+lout.head = 0 /* inizializzazione (non indispensabile) */
+x = l1.head
+while x != NULL
+AGGIUNGI(lout, x.info)
+x = x.next
+x = l2.head
+while x != NULL
+if !TROVATO(lout, x.info)
+AGGIUNGI(lout.x.info)
+x = x.next
+return lout
+
+TROVATO(l,k)
+x = l.head
+while (x != NULL)
+	if (x.info == k) return TRUE
+	x = x.next
+return FALSE
+
+
+----------------------------------------------------------------------------------------------------------------
+
+esercizi sugli alberi binari (1)
+• scrivi lo pseudocodice della funzione
+CONTA_MINORI(t) che accetti in input un
+albero binario t e restituisca il numero di nodi di
+t che hanno un valore della chiave minore di
+quello del genitore
+– la radice, non avendo genitore, non deve essere
+contata
+
+CONTA_MINORI(t)
+return CONTA_RIC(t.root)
+
+CONTA_RIC(n)
+minori = 0
+if (n == NULL)
+	return minori
+if (n.parent != NULL)
+	if (n.info < n.parent.info)
+		minori = 1
+return minori + CONTA_RIC(n.left) + CONTA_RIC(n.right)

@@ -1,0 +1,254 @@
+ESERCIZI PSEUDO ALBERI
+
+CREATE-TREE()
+//istanziato un nuovo albero t
+return t.root
+
+IS-EMPTY(t)
+return t.root == NULL
+
+ROOT(t)
+x = t.root
+return x
+
+LEFT(t,n)
+return n.left
+
+RIGHT(t,n)
+return n.right
+
+INFO(t,n)
+return n.info
+
+TWO_CHILDREN(n)
+return (n.left != NULL) && (n.right != NULL)
+
+ADD-ROOT(t,k)		//l albero e' vuoto per ipotesi, t.root = NULL
+//nodo e' un nuovo nodo
+nodo.info = k
+nodo.parent = NULL
+nodo.left = NULL
+nodo.right = NULL
+t.root = nodo
+
+ADD-LEFT(t,n,z)
+//new nuovo nodo con info = z
+if (t.root.info == n.info)
+	new.left = n.left
+	n.left.parent = new
+	n.left = new
+	new.parent = n
+else 
+	ADD-LEFT(t.left,n,z)
+	ADD-LEFT(t.right,n,z)
+
+ADD-RIGHT(t,n,z)
+if (t.root.info == n.info)
+	//new nuovo nodo con info = z
+	new.right = n.right
+	n.right.parent = new
+	n.right = new
+	new.parent = n
+else
+	ADD-RIGHT(t.left, n, z)
+	ADD-RIGHT(t.right, n, z)
+
+ONLY_LEFT(t)
+if (t != NULL)
+	if (t.root.right != NULL)
+		return FALSE
+	return TRUE && ONLY_LEFT(t.root.left)
+else
+	return TRUE
+
+CERCA(t,n) //preordine
+if (t != NULL)
+	if (t.root.info == n)
+		return TRUE
+	else 
+		return (CERCA(t.left, n) || CERCA(t.right,n))
+else
+	return FALSE
+
+CERCA(t,n) //postordine
+if (t != NULL)
+	l = CERCA(t.left, n)
+	r = CERCA(t.right, n)
+	return l || r || (t.root.info == n)
+else
+	return FALSE
+
+CERCA(t,n) //simmetrica
+if (t != NULL)
+	return CERCA(t.left, n) || (t.root.info == n) || CERCA(t.right, n)
+else
+	return FALSE
+
+CONTA-NODI(t) //in postordine
+if (t != NULL)
+	return CONTA-NODI(t.left) + CONTA-NODI(t.right) + 1
+else
+	return 0
+
+CAMMINO(t)			//confrontiamo
+if (t == NULL)
+	return TRUE
+else
+	if (t.left != NULL && t.right != NULL)
+		return FALSE
+	return CAMMINO(t.left) && CAMMINO(t.right)
+
+HEIGHT(t)
+if (t == NULL)
+	return 0
+else
+	l = HEIGHT(t.left)
+	r = HEIGHT(t.right)
+	return MAX(l,r) + 1
+
+MAX(l,r)	//supporto
+if (l >= r)
+	return l
+else
+	return r
+
+AVERAGE(t)
+if (t == NULL)
+	return error
+else
+	return SOMMA(t)/CONTA-NODI(t)
+
+SOMMA(t)
+if (t != NULL)
+	return SOMMA(t.left) + SOMMA(t.right) + t.root.info
+else
+	return 0
+
+COMPLETO(t)	
+if (t == NULL)
+	return TRUE
+else
+	return HEIGHT(t.left) == HEIGHT(t.right)
+
+DEALLOCA(t)
+if (t != NULL)
+	DEALLOCA(t.left)
+	DEALLOCA(t.right)
+	t = NULL
+	return
+else
+	return
+
+POTA(t,x)
+if (t != NULL)
+	if (t.root == x)
+		DEALLOCA(t)
+	POTA(t.left, x)
+	POTA(t.right, x)
+
+POTA(t,h)
+if h == 0
+	POTA(t, t.root)
+else
+	POTA(t.left, h-1)
+	POTA(t.right, h-1)
+
+VALORE-NONNO(t)	
+if (t == NULL)
+	return 0
+else
+	l = VALORE-NONNO(t.left)
+	l = VALORE-NONNO(t.right)
+	if (t.parent.info == t.info)
+		return 1 + l + r
+	else
+		return l + r
+
+DUE-FIGLI(t)	
+if (t == NULL)
+	return 0
+else
+	l = DUE-FIGLI(t.left)
+	r = DUE-FIGLI(t.right)
+	if ((t.left != NULL) && (t.right != NULL))
+		return 1 + l + r
+	else
+		return l + r
+
+QUATTRO-NIPOTI(t)
+if ((t.left != NULL) && (t.right != NULL))
+	return 0
+else
+	if (((t.left.left != NULL) && (t.left.right != NULL)) && (t.right.left != NULL) && (t.right.right != NULL))
+		return 1 + QUATTRO-NIPOTI(t.left) + QUATTRO-NIPOTI(t.right)
+	else
+		return QUATTRO-NIPOTI(t.left) + QUATTRO-NIPOTI(t.right)
+
+CAMMINO(t,n)	
+l.head = NULL
+while (n != NULL)
+	ADD-TESTA(l, n.info)
+	n = n.parent
+return l
+
+PARENTELA(n1, n2)			//NON FINITO
+while ((t.root != n1) || (t.root != n2))
+	if (t.root == n1)
+		c = CAMMINO(t, n2)
+	if (t.root == n2)
+		c = CAMMINO(t, n1)
+	if (c.head != NULL)
+		x = c.head
+		while (x != NULL)
+			cont ++
+			x = x.next
+		return cont
+	//incrementa t ma non so come
+
+											//ALBERI DI GRADO QUALSIASI//
+
+CONTA-NODI(t)
+if (t == NULL)
+	return 0
+else
+	x = t.right
+	while (x != NULL)
+		fratelli ++
+		x = x.right
+	return 1 + fratelli + CONTANODI(t.left)
+
+CERCA(t,k)
+if (t == NULL)
+	return
+else
+	CERCA(t.left, k)
+	if (t.root.info == k)
+		return t.root
+	x = t.right
+	while x != NULL
+		if x.info == k
+			return x
+		x = x.next
+return NULL
+
+BINARIO(t)			//la struttura!
+if (t == NULL)
+	return TRUE
+else
+	x = t.right
+	while (x != NULL)
+		fratelli ++
+		x = x.next
+	return (fratelli <= 1) && BINARIO(t.left)
+
+GRADO-MASSIMO(t)
+if (t == NULL)
+	return 0
+else
+	x = t.right
+	while (x != NULL)
+		grado ++
+		x = x.next
+	return MAX(grado, GRADO-MASSIMO(t.left))
+
+MAX(x,y) //di facile implementazione
